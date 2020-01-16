@@ -1,0 +1,54 @@
+﻿@model SBD_Projekt.Models.Adres
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Adres</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Kraj)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Kraj)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Miasto)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Miasto)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Województwo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Województwo)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Ulica)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Ulica)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Nr_domu)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nr_domu)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Nr_miszkania)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nr_miszkania)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.id_adres">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
