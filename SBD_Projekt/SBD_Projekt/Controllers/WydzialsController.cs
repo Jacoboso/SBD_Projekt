@@ -45,6 +45,8 @@ namespace SBD_Projekt.Controllers
         // GET: Wydzials/Create
         public IActionResult Create()
         {
+            ViewData["BudyneksCount"] = _context.Budynek.Count();
+            ViewData["Budynek"] = new SelectList(_context.Budynek, "id_budynek", "Miasto");
             return View();
         }
 
@@ -77,6 +79,9 @@ namespace SBD_Projekt.Controllers
             {
                 return NotFound();
             }
+
+            ViewData["BudyneksCount"] = _context.Budynek.Count();
+            ViewData["Budynek"] = new SelectList(_context.Budynek, "id_budynek", "Miasto");
             return View(wydzial);
         }
 

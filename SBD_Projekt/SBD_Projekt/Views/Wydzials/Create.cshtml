@@ -14,8 +14,16 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="id_budynku" class="control-label"></label>
-                <input asp-for="id_budynku" class="form-control" />
+                @if (ViewBag.BudyneksCount > 0)
+                {
+                    <select asp-for="id_budynku" class="form-control" asp-items="ViewBag.Budynek"></select>
+                }
+                else
+                {
+                    <p class="form-text text-danger">Brak budynków w bazie danych</p>
+                }
                 <span asp-validation-for="id_budynku" class="text-danger"></span>
+                <input class="btn btn-primary" type="button" value="Stwórz nowy budynek" onclick="window.location.href = '@Url.Action("Create", "Budyneks")'" />
             </div>
             <div class="form-group">
                 <label asp-for="nazwa" class="control-label"></label>
