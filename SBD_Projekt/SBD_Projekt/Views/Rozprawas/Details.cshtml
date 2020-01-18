@@ -1,0 +1,54 @@
+﻿@model SBD_Projekt.Models.Rozprawa
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Rozprawa</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.id_godziny)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.id_godziny)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.id_wydzial)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.id_wydzial)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.id_dowod)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.id_dowod)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.id_sedzia)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.id_sedzia)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.id_prawnik)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.id_prawnik)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.id_klient)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.id_klient)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.id_rozprawa">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

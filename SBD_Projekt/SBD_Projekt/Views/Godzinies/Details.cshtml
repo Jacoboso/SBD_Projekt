@@ -1,0 +1,30 @@
+﻿@model SBD_Projekt.Models.Godziny
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Godziny</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.OdGodziny)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.OdGodziny)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DoGodziny)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DoGodziny)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.id_godziny">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
