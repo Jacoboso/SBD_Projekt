@@ -45,6 +45,14 @@ namespace SBD_Projekt.Controllers
         // GET: Spotkanies/Create
         public IActionResult Create()
         {
+            ViewData["SalasCount"] = _context.Sala.Count();
+            ViewData["Sala"] = new SelectList(_context.Sala, "id_sala", "Rodzaj");
+            ViewData["GodziniesCount"] = _context.Godziny.Count();
+            ViewData["Godziny"] = new SelectList(_context.Godziny, "id_godziny", "id_godziny");
+            ViewData["PrawniksCount"] = _context.Prawnik.Count();
+            ViewData["Prawnik"] = new SelectList(_context.Prawnik, "id_prawnik", "id_prawnik");
+            ViewData["KlientsCount"] = _context.Klient.Count();
+            ViewData["Klient"] = new SelectList(_context.Klient, "id_klient", "id_klient");
             return View();
         }
 
@@ -77,6 +85,14 @@ namespace SBD_Projekt.Controllers
             {
                 return NotFound();
             }
+            ViewData["SalasCount"] = _context.Sala.Count();
+            ViewData["Sala"] = new SelectList(_context.Sala, "id_sala", "Rodzaj");
+            ViewData["GodziniesCount"] = _context.Godziny.Count();
+            ViewData["Godziny"] = new SelectList(_context.Godziny, "id_godziny", "id_godziny");
+            ViewData["PrawniksCount"] = _context.Prawnik.Count();
+            ViewData["Prawnik"] = new SelectList(_context.Prawnik, "id_prawnik", "id_prawnik");
+            ViewData["KlientsCount"] = _context.Klient.Count();
+            ViewData["Klient"] = new SelectList(_context.Klient, "id_klient", "id_klient");
             return View(spotkanie);
         }
 

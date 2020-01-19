@@ -45,6 +45,12 @@ namespace SBD_Projekt.Controllers
         // GET: Obslugas/Create
         public IActionResult Create()
         {
+            ViewData["OsobasCount"] = _context.Osoba.Count();
+            ViewData["Osoba"] = new SelectList(_context.Osoba, "id_osoba", "Imie");
+            ViewData["ZarobkisCount"] = _context.Zarobki.Count();
+            ViewData["Zarobki"] = new SelectList(_context.Zarobki, "id_zarobki", "zarobek");
+            ViewData["GodziniesCount"] = _context.Godziny.Count();
+            ViewData["Godziny"] = new SelectList(_context.Godziny, "id_godziny", "OdGodziny");
             return View();
         }
 
@@ -77,6 +83,12 @@ namespace SBD_Projekt.Controllers
             {
                 return NotFound();
             }
+            ViewData["OsobasCount"] = _context.Osoba.Count();
+            ViewData["Osoba"] = new SelectList(_context.Osoba, "id_osoba", "Imie");
+            ViewData["ZarobkisCount"] = _context.Zarobki.Count();
+            ViewData["Zarobki"] = new SelectList(_context.Zarobki, "id_zarobki", "zarobek");
+            ViewData["GodziniesCount"] = _context.Godziny.Count();
+            ViewData["Godziny"] = new SelectList(_context.Godziny, "id_godziny", "OdGodziny");
             return View(obsluga);
         }
 

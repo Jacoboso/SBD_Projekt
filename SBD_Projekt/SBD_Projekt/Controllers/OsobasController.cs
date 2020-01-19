@@ -56,6 +56,8 @@ namespace SBD_Projekt.Controllers
         // GET: Osobas/Create
         public IActionResult Create()
         {
+            ViewData["AdresCount"] = _context.Adres.Count();
+            ViewData["Adres"] = new SelectList(_context.Adres, "id_adres", "Miasto");
             return View();
         }
 
@@ -88,6 +90,8 @@ namespace SBD_Projekt.Controllers
             {
                 return NotFound();
             }
+            ViewData["AdresCount"] = _context.Adres.Count();
+            ViewData["Adres"] = new SelectList(_context.Adres, "id_adres", "Miasto");
             return View(osoba);
         }
 

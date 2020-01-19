@@ -15,13 +15,29 @@
             <input type="hidden" asp-for="id_klient" />
             <div class="form-group">
                 <label asp-for="id_osoba" class="control-label"></label>
-                <input asp-for="id_osoba" class="form-control" />
+                @if (ViewBag.OsobasCount > 0)
+                {
+                    <select asp-for="id_osoba" class="form-control" asp-items="ViewBag.Osoba"></select>
+                }
+                else
+                {
+                    <p class="form-text text-danger">Brak osób w bazie danych</p>
+                }
                 <span asp-validation-for="id_osoba" class="text-danger"></span>
+                <input class="btn btn-primary" type="button" value="Stwórz nową osobę" onclick="window.location.href = '@Url.Action("Create", "Osobas")'" />
             </div>
             <div class="form-group">
                 <label asp-for="id_prawnik" class="control-label"></label>
-                <input asp-for="id_prawnik" class="form-control" />
+                @if (ViewBag.PrawniksCount > 0)
+                {
+                    <select asp-for="id_prawnik" class="form-control" asp-items="ViewBag.Prawnik"></select>
+                }
+                else
+                {
+                    <p class="form-text text-danger">Brak prawników w bazie danych</p>
+                }
                 <span asp-validation-for="id_prawnik" class="text-danger"></span>
+                <input class="btn btn-primary" type="button" value="Stwórz nowego prawnika" onclick="window.location.href = '@Url.Action("Create", "Prawniks")'" />
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

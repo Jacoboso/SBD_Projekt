@@ -14,33 +14,81 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="id_godziny" class="control-label"></label>
-                <input asp-for="id_godziny" class="form-control" />
+                @if (ViewBag.GodziniesCount > 0)
+                {
+                    <select asp-for="id_godziny" class="form-control" asp-items="ViewBag.Godziny"></select>
+                }
+                else
+                {
+                    <p class="form-text text-danger">Brak godzin w bazie danych</p>
+                }
                 <span asp-validation-for="id_godziny" class="text-danger"></span>
+                <input class="btn btn-primary" type="button" value="Stwórz nową godzine" onclick="window.location.href = '@Url.Action("Create", "Godzinies")'" />
             </div>
             <div class="form-group">
                 <label asp-for="id_wydzial" class="control-label"></label>
-                <input asp-for="id_wydzial" class="form-control" />
+                @if (ViewBag.WydzialsCount > 0)
+                {
+                    <select asp-for="id_wydzial" class="form-control" asp-items="ViewBag.Wydzial"></select>
+                }
+                else
+                {
+                    <p class="form-text text-danger">Brak wydziałów w bazie danych</p>
+                }
                 <span asp-validation-for="id_wydzial" class="text-danger"></span>
+                <input class="btn btn-primary" type="button" value="Stwórz nowy wydział" onclick="window.location.href = '@Url.Action("Create", "Wydzials")'" />
             </div>
             <div class="form-group">
                 <label asp-for="id_dowod" class="control-label"></label>
-                <input asp-for="id_dowod" class="form-control" />
+                @if (ViewBag.DowodsCount > 0)
+                {
+                    <select asp-for="id_dowod" class="form-control" asp-items="ViewBag.Dowod"></select>
+                }
+                else
+                {
+                    <p class="form-text text-danger">Brak dowodów w bazie danych</p>
+                }
                 <span asp-validation-for="id_dowod" class="text-danger"></span>
+                <input class="btn btn-primary" type="button" value="Stwórz nowy dowód" onclick="window.location.href = '@Url.Action("Create", "Dowods")'" />
             </div>
             <div class="form-group">
                 <label asp-for="id_sedzia" class="control-label"></label>
-                <input asp-for="id_sedzia" class="form-control" />
+                @if (ViewBag.SedziasCount > 0)
+                {
+                    <select asp-for="id_sedzia" class="form-control" asp-items="ViewBag.Sedzia"></select>
+                }
+                else
+                {
+                    <p class="form-text text-danger">Brak sędziów w bazie danych</p>
+                }
                 <span asp-validation-for="id_sedzia" class="text-danger"></span>
+                <input class="btn btn-primary" type="button" value="Stwórz nowego sędzie" onclick="window.location.href = '@Url.Action("Create", "Sedzias")'" />
             </div>
             <div class="form-group">
                 <label asp-for="id_prawnik" class="control-label"></label>
-                <input asp-for="id_prawnik" class="form-control" />
+                @if (ViewBag.PrawniksCount > 0)
+                {
+                    <select asp-for="id_prawnik" class="form-control" asp-items="ViewBag.Prawnik"></select>
+                }
+                else
+                {
+                    <p class="form-text text-danger">Brak prawników w bazie danych</p>
+                }
                 <span asp-validation-for="id_prawnik" class="text-danger"></span>
+                <input class="btn btn-primary" type="button" value="Stwórz nowego prawnika" onclick="window.location.href = '@Url.Action("Create", "Prawniks")'" />
             </div>
             <div class="form-group">
                 <label asp-for="id_klient" class="control-label"></label>
-                <input asp-for="id_klient" class="form-control" />
+                @if (ViewBag.KlientsCount > 0)
+                {
+                    <select asp-for="id_klient" class="form-control" asp-items="ViewBag.Klient"></select>
+                }
+                else
+                {
+                    <p class="form-text text-danger">Brak klientów w bazie danych</p>
+                }
                 <span asp-validation-for="id_klient" class="text-danger"></span>
+                <input class="btn btn-primary" type="button" value="Stwórz nowego klienta" onclick="window.location.href = '@Url.Action("Create", "Klients")'" />
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

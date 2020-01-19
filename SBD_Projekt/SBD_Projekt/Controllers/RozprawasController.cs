@@ -45,6 +45,18 @@ namespace SBD_Projekt.Controllers
         // GET: Rozprawas/Create
         public IActionResult Create()
         {
+            ViewData["GodziniesCount"] = _context.Godziny.Count();
+            ViewData["Godziny"] = new SelectList(_context.Godziny, "id_godziny", "id_godziny");
+            ViewData["WydzialsCount"] = _context.Wydzial.Count();
+            ViewData["Wydzial"] = new SelectList(_context.Wydzial, "id_wydzial", "id_wydzial");
+            ViewData["DowodsCount"] = _context.Dowod.Count();
+            ViewData["Dowod"] = new SelectList(_context.Dowod, "id_dowod", "Nazwa");
+            ViewData["SedziasCount"] = _context.Sedzia.Count();
+            ViewData["Sedzia"] = new SelectList(_context.Sedzia, "id_sedzia", "id_sedzia");
+            ViewData["PrawniksCount"] = _context.Prawnik.Count();
+            ViewData["Prawnik"] = new SelectList(_context.Prawnik, "id_prawnik", "id_prawnik");
+            ViewData["KlientsCount"] = _context.Klient.Count();
+            ViewData["Klient"] = new SelectList(_context.Klient, "id_klient", "id_klient");
             return View();
         }
 
@@ -77,6 +89,18 @@ namespace SBD_Projekt.Controllers
             {
                 return NotFound();
             }
+            ViewData["GodziniesCount"] = _context.Godziny.Count();
+            ViewData["Godziny"] = new SelectList(_context.Godziny, "id_godziny", "id_godziny");
+            ViewData["WydzialsCount"] = _context.Wydzial.Count();
+            ViewData["Wydzial"] = new SelectList(_context.Wydzial, "id_wydzial", "id_wydzial");
+            ViewData["DowodsCount"] = _context.Dowod.Count();
+            ViewData["Dowod"] = new SelectList(_context.Dowod, "id_dowod", "Nazwa");
+            ViewData["SedziasCount"] = _context.Sedzia.Count();
+            ViewData["Sedzia"] = new SelectList(_context.Sedzia, "id_sedzia", "id_sedzia");
+            ViewData["PrawniksCount"] = _context.Prawnik.Count();
+            ViewData["Prawnik"] = new SelectList(_context.Prawnik, "id_prawnik", "id_prawnik");
+            ViewData["KlientsCount"] = _context.Klient.Count();
+            ViewData["Klient"] = new SelectList(_context.Klient, "id_klient", "id_klient");
             return View(rozprawa);
         }
 

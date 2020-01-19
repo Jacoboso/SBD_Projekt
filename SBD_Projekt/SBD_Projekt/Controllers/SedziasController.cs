@@ -45,6 +45,12 @@ namespace SBD_Projekt.Controllers
         // GET: Sedzias/Create
         public IActionResult Create()
         {
+            ViewData["OsobasCount"] = _context.Osoba.Count();
+            ViewData["Osoba"] = new SelectList(_context.Osoba, "id_osoba", "Imie");
+            ViewData["WydzialsCount"] = _context.Wydzial.Count();
+            ViewData["Wydzial"] = new SelectList(_context.Wydzial, "id_wydzial", "nazwa");
+            ViewData["ZarobkisCount"] = _context.Zarobki.Count();
+            ViewData["Zarobki"] = new SelectList(_context.Zarobki, "id_zarobki", "zarobek");
             return View();
         }
 
@@ -77,6 +83,12 @@ namespace SBD_Projekt.Controllers
             {
                 return NotFound();
             }
+            ViewData["OsobasCount"] = _context.Osoba.Count();
+            ViewData["Osoba"] = new SelectList(_context.Osoba, "id_osoba", "Imie");
+            ViewData["WydzialsCount"] = _context.Wydzial.Count();
+            ViewData["Wydzial"] = new SelectList(_context.Wydzial, "id_wydzial", "nazwa");
+            ViewData["ZarobkisCount"] = _context.Zarobki.Count();
+            ViewData["Zarobki"] = new SelectList(_context.Zarobki, "id_zarobki", "zarobek");
             return View(sedzia);
         }
 

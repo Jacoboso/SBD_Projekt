@@ -45,6 +45,10 @@ namespace SBD_Projekt.Controllers
         // GET: Klients/Create
         public IActionResult Create()
         {
+            ViewData["OsobasCount"] = _context.Osoba.Count();
+            ViewData["Osoba"] = new SelectList(_context.Osoba, "id_osoba", "Imie");
+            ViewData["PrawniksCount"] = _context.Prawnik.Count();
+            ViewData["Prawnik"] = new SelectList(_context.Prawnik, "id_prawnik", "id_prawnik");
             return View();
         }
 
@@ -77,6 +81,10 @@ namespace SBD_Projekt.Controllers
             {
                 return NotFound();
             }
+            ViewData["OsobasCount"] = _context.Osoba.Count();
+            ViewData["Osoba"] = new SelectList(_context.Osoba, "id_osoba", "Imie");
+            ViewData["PrawniksCount"] = _context.Prawnik.Count();
+            ViewData["Prawnik"] = new SelectList(_context.Prawnik, "id_prawnik", "id_prawnik");
             return View(klient);
         }
 
