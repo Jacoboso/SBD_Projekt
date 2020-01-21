@@ -171,14 +171,25 @@ namespace SBD_Projekt.Controllers
                 return NotFound();
             }
 
-            var prawnik = await _context.Prawnik
-                .FirstOrDefaultAsync(m => m.id_prawnik == id);
+           
+            var prawnik = await _context.Prawnik.FirstOrDefaultAsync(m => m.id_prawnik == id);
+            var osoba = await _context.Osoba.FirstOrDefaultAsync(n => n.id_osoba == prawnik.id_osoba);
+            var prawnikToShow = new PrawnikDetailsViewModel
+            {
+                id_prawnik = prawnik.id_prawnik,
+                Osoba = osoba,
+                Adres = await _context.Adres.FirstOrDefaultAsync(n => n.id_adres == osoba.id_adres),
+                Godziny = await _context.Godziny.FirstOrDefaultAsync(n => n.id_godziny == prawnik.id_godziny),
+                Zarobki = await _context.Zarobki.FirstOrDefaultAsync(n => n.id_zarobki == prawnik.id_zarobki),
+                Specjalizacje = await _context.Specjalizacja.FirstOrDefaultAsync(n => n.id_specjalizacja == prawnik.id_specjalizacja)
+            };
+
             if (prawnik == null)
             {
                 return NotFound();
             }
 
-            return View(prawnik);
+            return View(prawnikToShow);
         }
 
         // POST: Prawniks/Delete/5

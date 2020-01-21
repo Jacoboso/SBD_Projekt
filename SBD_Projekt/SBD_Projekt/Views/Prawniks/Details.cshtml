@@ -1,13 +1,13 @@
 ﻿@model SBD_Projekt.Models.ViewModel.PrawnikDetailsViewModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Szczegóły";
 }
 
-<h1>Details</h1>
+    <h1>Szczegóły</h1>
 
 <div>
-    <h4>PrawnikDetailsViewModel</h4>
+    <h4>Prawnik</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -90,6 +90,6 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new {  id = Model.id_prawnik }) |
-    <a asp-action="Index">Back to List</a>
+    @Html.ActionLink("Edytuj", "Edit", new {  id = Model.id_prawnik }) |
+    <a asp-action="Index">Wróć do listy</a>
 </div>
