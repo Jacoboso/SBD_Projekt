@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using SBD_Projekt.Models.ViewModel;
 using SBD_Projekt.Models;
 
 namespace SBD_Projekt.Controllers
@@ -34,19 +35,41 @@ namespace SBD_Projekt.Controllers
 
             var obsluga = await _context.Obsluga
                 .FirstOrDefaultAsync(m => m.id_obsluga == id);
+            var osoba = await _context.Osoba.FirstOrDefaultAsync(n => n.id_osoba == obsluga.id_osoba);
+            var obslugaToShow = new OblugaDetailsViewModel
+            {
+                id_obsluga = obsluga.id_obsluga,
+                Osoba = osoba,
+                Adres = await _context.Adres.FirstOrDefaultAsync(n => n.id_adres == osoba.id_adres),
+                Godziny = await _context.Godziny.FirstOrDefaultAsync(n => n.id_godziny == obsluga.id_godziny),
+                Zarobki = await _context.Zarobki.FirstOrDefaultAsync(n => n.id_zarobki == obsluga.id_zarobki),
+                typ= obsluga.typ      
+            };
+
+
             if (obsluga == null)
             {
                 return NotFound();
             }
 
-            return View(obsluga);
+            return View(obslugaToShow);
         }
 
         // GET: Obslugas/Create
         public IActionResult Create()
         {
             ViewData["OsobasCount"] = _context.Osoba.Count();
-            ViewData["Osoba"] = new SelectList(_context.Osoba, "id_osoba", "Imie");
+
+
+            var lista = new List<Tuple<int, string>>();
+            foreach (var osoba in _context.Osoba)
+            {
+                lista.Add(new Tuple<int, string>(
+                    osoba.id_osoba,
+                    osoba.Imie + " " + osoba.Nazwisko)
+                );
+            }
+            ViewData["Osoba"] = new SelectList(lista, "Item1", "Item2");
             ViewData["ZarobkisCount"] = _context.Zarobki.Count();
             ViewData["Zarobki"] = new SelectList(_context.Zarobki, "id_zarobki", "zarobek");
             ViewData["GodziniesCount"] = _context.Godziny.Count();
@@ -84,7 +107,16 @@ namespace SBD_Projekt.Controllers
                 return NotFound();
             }
             ViewData["OsobasCount"] = _context.Osoba.Count();
-            ViewData["Osoba"] = new SelectList(_context.Osoba, "id_osoba", "Imie");
+
+            var lista = new List<Tuple<int, string>>();
+            foreach (var osoba in _context.Osoba)
+            {
+                lista.Add(new Tuple<int, string>(
+                    osoba.id_osoba,
+                    osoba.Imie + " " + osoba.Nazwisko)
+                );
+            }
+            ViewData["Osoba"] = new SelectList(lista, "Item1", "Item2");
             ViewData["ZarobkisCount"] = _context.Zarobki.Count();
             ViewData["Zarobki"] = new SelectList(_context.Zarobki, "id_zarobki", "zarobek");
             ViewData["GodziniesCount"] = _context.Godziny.Count();
@@ -136,13 +168,25 @@ namespace SBD_Projekt.Controllers
             }
 
             var obsluga = await _context.Obsluga
-                .FirstOrDefaultAsync(m => m.id_obsluga == id);
+               .FirstOrDefaultAsync(m => m.id_obsluga == id);
+            var osoba = await _context.Osoba.FirstOrDefaultAsync(n => n.id_osoba == obsluga.id_osoba);
+            var obslugaToShow = new OblugaDetailsViewModel
+            {
+                id_obsluga = obsluga.id_obsluga,
+                Osoba = osoba,
+                Adres = await _context.Adres.FirstOrDefaultAsync(n => n.id_adres == osoba.id_adres),
+                Godziny = await _context.Godziny.FirstOrDefaultAsync(n => n.id_godziny == obsluga.id_godziny),
+                Zarobki = await _context.Zarobki.FirstOrDefaultAsync(n => n.id_zarobki == obsluga.id_zarobki),
+                typ = obsluga.typ
+            };
+
+
             if (obsluga == null)
             {
                 return NotFound();
             }
 
-            return View(obsluga);
+            return View(obslugaToShow);
         }
 
         // POST: Obslugas/Delete/5
