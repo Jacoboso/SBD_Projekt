@@ -28,12 +28,7 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Osoba.Pesel)
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Osoba.id_adres)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Osoba.id_adres)
-        </dd>
+      
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Osoba.Telefon)
         </dt>
@@ -49,7 +44,6 @@
             @Html.DisplayFor(model => model.Adres.Kraj)
         </dd>
 
-
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Adres.Miasto)
         </dt>
@@ -63,6 +57,21 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Adres.Województwo)
         </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Adres.Nr_domu)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Adres.Nr_domu)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Adres.Nr_miszkania)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Adres.Nr_miszkania)
+        </dd>
+
     </dl>
 </div>
 <div>

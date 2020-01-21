@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SBD_Projekt.Models;
+using SBD_Projekt.Models.ViewModel;
 
 namespace SBD_Projekt.Controllers
 {
@@ -31,22 +32,44 @@ namespace SBD_Projekt.Controllers
             {
                 return NotFound();
             }
+            var prawnik = await _context.Prawnik.FirstOrDefaultAsync(m => m.id_prawnik == id);
+            var osoba = await _context.Osoba.FirstOrDefaultAsync(n => n.id_osoba == prawnik.id_osoba);
+            var prawnikToShow = new PrawnikDetailsViewModel
+            {
+                id_prawnik=prawnik.id_prawnik,
+                Osoba = osoba,
+                Adres = await _context.Adres.FirstOrDefaultAsync(n => n.id_adres == osoba.id_adres),
+                Godziny = await _context.Godziny.FirstOrDefaultAsync(n => n.id_godziny == prawnik.id_godziny),
+                Zarobki = await _context.Zarobki.FirstOrDefaultAsync(n => n.id_zarobki == prawnik.id_zarobki),
+                Specjalizacje = await _context.Specjalizacja.FirstOrDefaultAsync(n => n.id_specjalizacja == prawnik.id_specjalizacja)
+            };
 
-            var prawnik = await _context.Prawnik
-                .FirstOrDefaultAsync(m => m.id_prawnik == id);
+           
             if (prawnik == null)
             {
                 return NotFound();
             }
 
-            return View(prawnik);
+            return View(prawnikToShow);
         }
 
         // GET: Prawniks/Create
         public IActionResult Create()
         {
+
+
             ViewData["OsobasCount"] = _context.Osoba.Count();
-            ViewData["Osoba"] = new SelectList(_context.Osoba, "id_osoba", "Imie");
+
+
+            var lista = new List<Tuple<int, string>>();
+            foreach (var osoba in _context.Osoba)
+            {
+                lista.Add(new Tuple<int, string>(
+                    osoba.id_osoba,
+                    osoba.Imie + " " + osoba.Nazwisko)
+                );
+            }
+            ViewData["Osoba"] = new SelectList(lista, "Item1", "Item2");
             ViewData["ZarobkisCount"] = _context.Zarobki.Count();
             ViewData["Zarobki"] = new SelectList(_context.Zarobki, "id_zarobki", "zarobek");
             ViewData["GodziniesCount"] = _context.Godziny.Count();
@@ -86,7 +109,16 @@ namespace SBD_Projekt.Controllers
                 return NotFound();
             }
             ViewData["OsobasCount"] = _context.Osoba.Count();
-            ViewData["Osoba"] = new SelectList(_context.Osoba, "id_osoba", "Imie");
+
+            var lista = new List<Tuple<int, string>>();
+            foreach (var osoba in _context.Osoba)
+            {
+                lista.Add(new Tuple<int, string>(
+                    osoba.id_adres,
+                    osoba.Imie + " " + osoba.Nazwisko)
+                );
+            }
+            ViewData["Osoba"] = new SelectList(lista, "Item1", "Item2");
             ViewData["ZarobkisCount"] = _context.Zarobki.Count();
             ViewData["Zarobki"] = new SelectList(_context.Zarobki, "id_zarobki", "zarobek");
             ViewData["GodziniesCount"] = _context.Godziny.Count();

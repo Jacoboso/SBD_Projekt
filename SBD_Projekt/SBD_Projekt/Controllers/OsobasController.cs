@@ -57,7 +57,16 @@ namespace SBD_Projekt.Controllers
         public IActionResult Create()
         {
             ViewData["AdresCount"] = _context.Adres.Count();
-            ViewData["Adres"] = new SelectList(_context.Adres, "id_adres", "Miasto");
+
+            var lista = new List<Tuple<int, string>>();
+            foreach(var adres in _context.Adres)
+            {
+                lista.Add(new Tuple<int, string>(
+                    adres.id_adres, 
+                    adres.id_adres + " " + adres.Kraj + " " + adres.Miasto + " " + adres.Ulica + " " + adres.Nr_domu + "/" + adres.Nr_miszkania)
+                );
+            }          
+            ViewData["Adres"] = new SelectList(lista, "Item1", "Item2");
             return View();
         }
 
@@ -68,6 +77,7 @@ namespace SBD_Projekt.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("id_osoba,Imie,Nazwisko,Pesel,id_adres,Telefon")] Osoba osoba)
         {
+            
             if (ModelState.IsValid)
             {
                 _context.Add(osoba);
