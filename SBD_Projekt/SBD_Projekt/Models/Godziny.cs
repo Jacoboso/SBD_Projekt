@@ -11,7 +11,9 @@ namespace SBD_Projekt.Models
 
         [Key]
         public int id_godziny { get; set; }
+        [Required]
         public DateTime OdGodziny { get; set; }
+        [Required]
         public DateTime DoGodziny { get; set; }
     }
 }

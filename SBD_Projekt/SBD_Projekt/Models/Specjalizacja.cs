@@ -10,7 +10,9 @@ namespace SBD_Projekt.Models
     {
         [Key]
         public int id_specjalizacja { get; set; }
+        [Required]
         public string nazwa { get; set; }
+        [Required]
         public string doswiadczenie { get; set; }
     }
 }

@@ -12,6 +12,7 @@ namespace SBD_Projekt.Models
         public int id_wydzial { get; set; }
         public int id_budynku { get; set; }
 
+        [Required]
         public string nazwa { get; set; }
     }
 }

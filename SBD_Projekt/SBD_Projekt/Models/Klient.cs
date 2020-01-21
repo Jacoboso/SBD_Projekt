@@ -10,6 +10,7 @@ namespace SBD_Projekt.Models
     {
         [Key]
         public int id_klient { get; set; }
+
         public int id_osoba { get; set; }
         public int id_prawnik { get; set; }
     }

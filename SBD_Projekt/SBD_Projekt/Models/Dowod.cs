@@ -10,7 +10,9 @@ namespace SBD_Projekt.Models
     {
         [Key]
         public int id_dowod { get; set; }
+        [Required]
         public string Nazwa { get; set; }
+        [Required]
         public string Typ { get; set; }
     }
 }

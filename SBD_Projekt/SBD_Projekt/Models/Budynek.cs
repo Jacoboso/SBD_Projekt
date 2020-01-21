@@ -10,9 +10,13 @@ namespace SBD_Projekt.Models
     {
         [Key]
         public int id_budynek { get; set; }
+        [Required]
         public string Miasto { get; set; }
+        [Required]
         public string Ulica { get; set; }
+        [Required]
         public string KodPocztowy { get; set; }
+        [Required]
         public string NrBudynku { get; set; }
     }
 }

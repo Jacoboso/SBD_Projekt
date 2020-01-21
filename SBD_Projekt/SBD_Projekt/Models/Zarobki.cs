@@ -10,7 +10,9 @@ namespace SBD_Projekt.Models
     {
         [Key]
         public int id_zarobki { get; set; }
+        [Required]
         public float zarobek { get; set; }
+        [Required]
         public float premia { get; set; }
     }
 }

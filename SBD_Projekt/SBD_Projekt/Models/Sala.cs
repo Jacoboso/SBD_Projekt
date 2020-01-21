@@ -10,7 +10,9 @@ namespace SBD_Projekt.Models
     {
         [Key]
         public int id_sala { get; set; }
+        [Required]
         public string Rodzaj { get; set; }
+        [Required]
         public string Wielkosc { get; set; }
     }
 }

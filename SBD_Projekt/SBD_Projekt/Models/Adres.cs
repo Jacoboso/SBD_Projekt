@@ -10,11 +10,17 @@ namespace SBD_Projekt.Models
         [Key]
         public int id_adres { get; set; }
 
+        [Required]
         public string Kraj { get; set; }
+        [Required]
         public string Miasto { get; set; }
+        [Required]
         public string Województwo { get; set; }
+        [Required]
         public string Ulica { get; set; }
+        [Required]
         public string Nr_domu { get; set; }
+        [Required]
         public string Nr_miszkania { get; set; }
 
     }
