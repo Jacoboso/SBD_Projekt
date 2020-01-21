@@ -1,33 +1,69 @@
-﻿@model SBD_Projekt.Models.Klient
+﻿@model SBD_Projekt.Models.ViewModel.KlientDetailsViewModel
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Usuń";
 }
 
-<h1>Delete</h1>
+    <h1>Usuń</h1>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Na pewno chcez to zrobić?</h3>
 <div>
     <h4>Klient</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.id_osoba)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Klient.Imie)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.id_osoba)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Klient.Imie)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.id_prawnik)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Klient.Nazwisko)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.id_prawnik)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Klient.Nazwisko)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Klient_Adres.Kraj)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Klient_Adres.Kraj)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Klient_Adres.Miasto)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Klient_Adres.Miasto)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Klient_Adres.Województwo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Klient_Adres.Województwo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Klient_Adres.Ulica)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Klient_Adres.Ulica)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Klient_Adres.Nr_domu)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Klient_Adres.Nr_domu)
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Klient_Adres.Nr_miszkania)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Klient_Adres.Nr_miszkania)
         </dd>
     </dl>
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="id_klient" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Usuń" class="btn btn-danger" /> |
+        <a asp-action="Index">Wróć do listy</a>
     </form>
 </div>

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SBD_Projekt.Models;
-
+using SBD_Projekt.Models.ViewModel;
 namespace SBD_Projekt.Controllers
 {
     public class KlientsController : Controller
@@ -34,21 +34,53 @@ namespace SBD_Projekt.Controllers
 
             var klient = await _context.Klient
                 .FirstOrDefaultAsync(m => m.id_klient == id);
+
+            var klientDet = new KlientDetailsViewModel
+            {
+                Klient = _context.Osoba.FirstOrDefault(m => m.id_osoba == klient.id_osoba),
+                Prawnik = _context.Osoba.FirstOrDefault(m => m.id_osoba == klient.id_prawnik),
+                Klient_Adres= _context.Adres.FirstOrDefault(m => m.id_adres == _context.Osoba.FirstOrDefault(m => m.id_osoba == klient.id_osoba).id_adres),
+                Prawnik_Specjalizacja = _context.Specjalizacja.FirstOrDefault(m => m.id_specjalizacja == _context.Prawnik.FirstOrDefault(m => m.id_prawnik == klient.id_prawnik).id_specjalizacja),
+            };
+
+
             if (klient == null)
             {
                 return NotFound();
             }
 
-            return View(klient);
+            return View(klientDet);
         }
 
         // GET: Klients/Create
         public IActionResult Create()
         {
             ViewData["OsobasCount"] = _context.Osoba.Count();
-            ViewData["Osoba"] = new SelectList(_context.Osoba, "id_osoba", "Imie");
-            ViewData["PrawniksCount"] = _context.Prawnik.Count();
-            ViewData["Prawnik"] = new SelectList(_context.Prawnik, "id_prawnik", "id_prawnik");
+
+            var lista = new List<Tuple<int, string>>();
+            foreach (var osoba in _context.Osoba)
+            {
+                lista.Add(new Tuple<int, string>(
+                    osoba.id_osoba,
+                    osoba.Imie + " " + osoba.Nazwisko)
+                );
+            }
+            ViewData["Osoba"] = new SelectList(lista, "Item1", "Item2");
+
+            ViewData["PrawniksCount"] = _context.Prawnik.Count();      
+            var prawnicyLista = new List<Tuple<int, string>>();
+            foreach (var osoba2 in _context.Osoba)
+            {              
+                foreach (var prawnik in _context.Prawnik)
+                {
+                    if(osoba2.id_osoba==prawnik.id_osoba)
+                    prawnicyLista.Add(new Tuple<int, string>(
+                    prawnik.id_prawnik,
+                    osoba2.Imie + " " + osoba2.Nazwisko)
+                );
+                } 
+            }
+            ViewData["Prawnik"] = new SelectList(prawnicyLista, "Item1", "Item2");
             return View();
         }
 
@@ -82,9 +114,31 @@ namespace SBD_Projekt.Controllers
                 return NotFound();
             }
             ViewData["OsobasCount"] = _context.Osoba.Count();
-            ViewData["Osoba"] = new SelectList(_context.Osoba, "id_osoba", "Imie");
+
+            var lista = new List<Tuple<int, string>>();
+            foreach (var osoba in _context.Osoba)
+            {
+                lista.Add(new Tuple<int, string>(
+                    osoba.id_osoba,
+                    osoba.Imie + " " + osoba.Nazwisko)
+                );
+            }
+            ViewData["Osoba"] = new SelectList(lista, "Item1", "Item2");
+
             ViewData["PrawniksCount"] = _context.Prawnik.Count();
-            ViewData["Prawnik"] = new SelectList(_context.Prawnik, "id_prawnik", "id_prawnik");
+            var prawnicyLista = new List<Tuple<int, string>>();
+            foreach (var osoba2 in _context.Osoba)
+            {
+                foreach (var prawnik in _context.Prawnik)
+                {
+                    if (osoba2.id_osoba == prawnik.id_osoba)
+                        prawnicyLista.Add(new Tuple<int, string>(
+                        prawnik.id_prawnik,
+                        osoba2.Imie + " " + osoba2.Nazwisko)
+                    );
+                }
+            }
+            ViewData["Prawnik"] = new SelectList(prawnicyLista, "Item1", "Item2");
             return View(klient);
         }
 
@@ -131,14 +185,24 @@ namespace SBD_Projekt.Controllers
                 return NotFound();
             }
 
+           
+
             var klient = await _context.Klient
-                .FirstOrDefaultAsync(m => m.id_klient == id);
+    .FirstOrDefaultAsync(m => m.id_klient == id);
+
+            var klientDet = new KlientDetailsViewModel
+            {
+                Klient = _context.Osoba.FirstOrDefault(m => m.id_osoba == klient.id_osoba),
+                Prawnik = _context.Osoba.FirstOrDefault(m => m.id_osoba == klient.id_prawnik),
+                Klient_Adres = _context.Adres.FirstOrDefault(m => m.id_adres == _context.Osoba.FirstOrDefault(m => m.id_osoba == klient.id_osoba).id_adres),
+                Prawnik_Specjalizacja = _context.Specjalizacja.FirstOrDefault(m => m.id_specjalizacja == _context.Prawnik.FirstOrDefault(m => m.id_prawnik == klient.id_prawnik).id_specjalizacja),
+            };
             if (klient == null)
             {
                 return NotFound();
             }
 
-            return View(klient);
+            return View(klientDet);
         }
 
         // POST: Klients/Delete/5
