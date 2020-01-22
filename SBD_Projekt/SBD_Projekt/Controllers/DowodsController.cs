@@ -53,7 +53,7 @@ namespace SBD_Projekt.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id_dowod,Nazwa,Typ")] Dowod dowod)
+        public async Task<IActionResult> Create([Bind("id_dowod,Nazwa,Typ,id_rozprawy")] Dowod dowod)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace SBD_Projekt.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id_dowod,Nazwa,Typ")] Dowod dowod)
+        public async Task<IActionResult> Edit(int id, [Bind("id_dowod,Nazwa,Typ,id_rozprawy")] Dowod dowod)
         {
             if (id != dowod.id_dowod)
             {

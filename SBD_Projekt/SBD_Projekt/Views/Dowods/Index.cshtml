@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<SBD_Projekt.Models.Dowod>
 
 @{
-    ViewData["Title"] = "Lista Dowodów";
+    ViewData["Title"] = "Index";
 }
 
-<h1>Lista Dowodów</h1>
+<h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Dodaj nowy dowód</a>
+    <a asp-action="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -17,6 +17,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Typ)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.id_rozprawy)
             </th>
             <th></th>
         </tr>
@@ -31,9 +34,12 @@
                 @Html.DisplayFor(modelItem => item.Typ)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.id_dowod">Edytuj</a> |
-                <a asp-action="Details" asp-route-id="@item.id_dowod">Szczegóły</a> |
-                <a asp-action="Delete" asp-route-id="@item.id_dowod">Usuń</a>
+                @Html.DisplayFor(modelItem => item.id_rozprawy)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.id_dowod">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.id_dowod">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.id_dowod">Delete</a>
             </td>
         </tr>
 }

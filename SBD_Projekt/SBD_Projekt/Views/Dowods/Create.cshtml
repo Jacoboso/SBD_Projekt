@@ -1,10 +1,10 @@
 ﻿@model SBD_Projekt.Models.Dowod
 
 @{
-    ViewData["Title"] = "Dodaj";
+    ViewData["Title"] = "Create";
 }
 
-<h1>Dodaj</h1>
+<h1>Create</h1>
 
 <h4>Dowod</h4>
 <hr />
@@ -23,14 +23,19 @@
                 <span asp-validation-for="Typ" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Dodaj" class="btn btn-primary" />
+                <label asp-for="id_rozprawy" class="control-label"></label>
+                <input asp-for="id_rozprawy" class="form-control" />
+                <span asp-validation-for="id_rozprawy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Wróć do listy</a>
+    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
