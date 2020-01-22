@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SBD_Projekt.Models.Prawnik>
+﻿@model IEnumerable<SBD_Projekt.Models.ViewModel.PrawnikDetailsViewModel>
 
 @{
     ViewData["Title"] = "Lista Prawników";
@@ -13,16 +13,16 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.id_osoba)
+                Imie i nazwisko
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.id_godziny)
+                Adres
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.id_zarobki)
+               Specjalizacja
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.id_specjalizacja)
+               Zarobki
             </th>
             <th></th>
         </tr>
@@ -31,16 +31,16 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.id_osoba)
+                @Html.DisplayFor(modelItem => item.Osoba.Imie)  @Html.DisplayFor(modelItem => item.Osoba.Nazwisko)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.id_godziny)
+                @Html.DisplayFor(modelItem => item.Adres.Miasto) @Html.DisplayFor(modelItem => item.Adres.Ulica) @Html.DisplayFor(modelItem => item.Adres.Nr_domu)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.id_zarobki)
+                @Html.DisplayFor(modelItem => item.Specjalizacje.nazwa)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.id_specjalizacja)
+                @Html.DisplayFor(modelItem => item.Zarobki.zarobek)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.id_prawnik">Edytuj</a> |

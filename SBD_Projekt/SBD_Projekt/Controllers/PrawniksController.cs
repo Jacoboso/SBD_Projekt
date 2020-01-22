@@ -22,7 +22,23 @@ namespace SBD_Projekt.Controllers
         // GET: Prawniks
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Prawnik.ToListAsync());
+            var ListaPrawników = new List<PrawnikDetailsViewModel>();
+            foreach(var prawnik in _context.Prawnik)
+            {
+                var osoba = await _context.Osoba.FirstOrDefaultAsync(n => n.id_osoba == prawnik.id_osoba);
+                ListaPrawników.Add(new PrawnikDetailsViewModel
+                {
+                    id_prawnik = prawnik.id_prawnik,
+                    Osoba = osoba,
+                    Adres = await _context.Adres.FirstOrDefaultAsync(n => n.id_adres == osoba.id_adres),
+                    Godziny = await _context.Godziny.FirstOrDefaultAsync(n => n.id_godziny == prawnik.id_godziny),
+                    Zarobki = await _context.Zarobki.FirstOrDefaultAsync(n => n.id_zarobki == prawnik.id_zarobki),
+                    Specjalizacje = await _context.Specjalizacja.FirstOrDefaultAsync(n => n.id_specjalizacja == prawnik.id_specjalizacja)
+                }) ;
+
+            }
+
+            return View(ListaPrawników);
         }
 
         // GET: Prawniks/Details/5
