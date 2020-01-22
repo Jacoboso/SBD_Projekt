@@ -87,8 +87,21 @@ namespace SBD_Projekt.Controllers
             ViewData["Osoba"] = new SelectList(lista, "Item1", "Item2");
             ViewData["ZarobkisCount"] = _context.Zarobki.Count();
             ViewData["Zarobki"] = new SelectList(_context.Zarobki, "id_zarobki", "zarobek");
+
             ViewData["GodziniesCount"] = _context.Godziny.Count();
-            ViewData["Godziny"] = new SelectList(_context.Godziny, "id_godziny", "OdGodziny");
+            var GodzinyList = new List<Tuple<int, string>>();
+            foreach (var godzina in _context.Godziny)
+            {
+                var odGodziny = godzina.OdGodziny.ToShortTimeString();
+                var doGodziny = godzina.DoGodziny.ToShortTimeString();
+
+                GodzinyList.Add(new Tuple<int, string>(
+                    godzina.id_godziny,
+                    odGodziny + " DO " + doGodziny)
+                );
+
+            }
+            ViewData["Godziny"] = new SelectList(GodzinyList, "Item1", "Item2");
             ViewData["SpecjalizacjasCount"] = _context.Specjalizacja.Count();
             ViewData["Specjalizacja"] = new SelectList(_context.Specjalizacja, "id_specjalizacja", "nazwa");
             return View();
@@ -129,7 +142,7 @@ namespace SBD_Projekt.Controllers
             foreach (var osoba in _context.Osoba)
             {
                 lista.Add(new Tuple<int, string>(
-                    osoba.id_adres,
+                    osoba.id_osoba,
                     osoba.Imie + " " + osoba.Nazwisko)
                 );
             }
@@ -137,7 +150,19 @@ namespace SBD_Projekt.Controllers
             ViewData["ZarobkisCount"] = _context.Zarobki.Count();
             ViewData["Zarobki"] = new SelectList(_context.Zarobki, "id_zarobki", "zarobek");
             ViewData["GodziniesCount"] = _context.Godziny.Count();
-            ViewData["Godziny"] = new SelectList(_context.Godziny, "id_godziny", "OdGodziny");
+            var GodzinyList = new List<Tuple<int, string>>();
+            foreach (var godzina in _context.Godziny)
+            {
+                var odGodziny = godzina.OdGodziny.ToShortTimeString();
+                var doGodziny = godzina.DoGodziny.ToShortTimeString();
+
+                GodzinyList.Add(new Tuple<int, string>(
+                    godzina.id_godziny,
+                    odGodziny + " DO " + doGodziny)
+                );
+
+            }
+            ViewData["Godziny"] = new SelectList(GodzinyList, "Item1", "Item2");
             ViewData["SpecjalizacjasCount"] = _context.Specjalizacja.Count();
             ViewData["Specjalizacja"] = new SelectList(_context.Specjalizacja, "id_specjalizacja", "nazwa");
             return View(prawnik);

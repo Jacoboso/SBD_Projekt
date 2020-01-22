@@ -81,11 +81,13 @@ namespace SBD_Projekt.Controllers
             var GodzinyList = new List<Tuple<int, string>>();
             foreach (var godzina in _context.Godziny)
             {
+                var odGodziny = godzina.OdGodziny.ToShortTimeString();
+                var doGodziny = godzina.DoGodziny.ToShortTimeString();
 
                 GodzinyList.Add(new Tuple<int, string>(
-                godzina.id_godziny,
-                godzina.OdGodziny + " DO " + godzina.DoGodziny)
-            );
+                    godzina.id_godziny,
+                    odGodziny + " DO " + doGodziny)
+                );
 
             }
             ViewData["Godziny"] = new SelectList(GodzinyList, "Item1", "Item2");

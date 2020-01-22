@@ -87,7 +87,19 @@ namespace SBD_Projekt.Controllers
             ViewData["ZarobkisCount"] = _context.Zarobki.Count();
             ViewData["Zarobki"] = new SelectList(_context.Zarobki, "id_zarobki", "zarobek");
             ViewData["GodziniesCount"] = _context.Godziny.Count();
-            ViewData["Godziny"] = new SelectList(_context.Godziny, "id_godziny", "OdGodziny");
+            var GodzinyList = new List<Tuple<int, string>>();
+            foreach (var godzina in _context.Godziny)
+            {
+                var odGodziny = godzina.OdGodziny.ToShortTimeString();
+                var doGodziny = godzina.DoGodziny.ToShortTimeString();
+
+                GodzinyList.Add(new Tuple<int, string>(
+                    godzina.id_godziny,
+                    odGodziny + " DO " + doGodziny)
+                );
+
+            }
+            ViewData["Godziny"] = new SelectList(GodzinyList, "Item1", "Item2");
             return View();
         }
 
@@ -134,7 +146,19 @@ namespace SBD_Projekt.Controllers
             ViewData["ZarobkisCount"] = _context.Zarobki.Count();
             ViewData["Zarobki"] = new SelectList(_context.Zarobki, "id_zarobki", "zarobek");
             ViewData["GodziniesCount"] = _context.Godziny.Count();
-            ViewData["Godziny"] = new SelectList(_context.Godziny, "id_godziny", "OdGodziny");
+            var GodzinyList = new List<Tuple<int, string>>();
+            foreach (var godzina in _context.Godziny)
+            {
+                var odGodziny = godzina.OdGodziny.ToShortTimeString();
+                var doGodziny = godzina.DoGodziny.ToShortTimeString();
+
+                GodzinyList.Add(new Tuple<int, string>(
+                    godzina.id_godziny,
+                    odGodziny + " DO " + doGodziny)
+                );
+
+            }
+            ViewData["Godziny"] = new SelectList(GodzinyList, "Item1", "Item2");
             return View(obsluga);
         }
 
