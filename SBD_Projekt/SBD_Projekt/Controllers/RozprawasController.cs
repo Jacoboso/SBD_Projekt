@@ -22,10 +22,26 @@ namespace SBD_Projekt.Controllers
         public async Task<IActionResult> Index()
         {
 
-            
            
 
-            return View(await _context.Rozprawa.ToListAsync());
+            var listaRozpraw = new List<RozprawaDetailsViewModel>();
+            foreach (var rozprawa in _context.Rozprawa)
+            {
+                //  var rozprawa = await _context.Rozprawa.FirstOrDefaultAsync(m => m.id_sedzia == sedzia.id_sedzia);
+                listaRozpraw.Add(new RozprawaDetailsViewModel
+                {
+                    id_rozprawa = rozprawa.id_rozprawa,
+                    Godziny= _context.Godziny.FirstOrDefault(m => m.id_godziny == rozprawa.id_godziny),
+                    Wydzial = _context.Wydzial.FirstOrDefault(m => m.id_wydzial == rozprawa.id_wydzial),
+                    Sedzia = _context.Osoba.FirstOrDefault(m => m.id_osoba == _context.Sedzia.FirstOrDefault(m => m.id_sedzia == rozprawa.id_sedzia).id_osoba),
+                    Prawnik = _context.Osoba.FirstOrDefault(m => m.id_osoba == _context.Prawnik.FirstOrDefault(m => m.id_prawnik == rozprawa.id_prawnik).id_osoba),
+                    Klient = _context.Osoba.FirstOrDefault(m => m.id_osoba == _context.Klient.FirstOrDefault(m => m.id_klient == rozprawa.id_klient).id_osoba),
+                    Dowody = _context.Dowod.Select(n => n).Where(n => n.id_rozprawy == rozprawa.id_rozprawa).ToList()
+                });
+
+            }
+
+            return View(listaRozpraw);
         }
 
         // GET: Rozprawas/Details/5
@@ -41,7 +57,8 @@ namespace SBD_Projekt.Controllers
             var rosprawaShow = new RozprawaDetailsViewModel
             {
                 id_rozprawa = rozprawa.id_rozprawa,
-                Wydzial= _context.Wydzial.FirstOrDefault(m => m.id_wydzial == rozprawa.id_wydzial),
+                Godziny = _context.Godziny.FirstOrDefault(m => m.id_godziny == rozprawa.id_godziny),
+                Wydzial = _context.Wydzial.FirstOrDefault(m => m.id_wydzial == rozprawa.id_wydzial),
                 Sedzia = _context.Osoba.FirstOrDefault(m => m.id_osoba == _context.Sedzia.FirstOrDefault(m => m.id_sedzia == rozprawa.id_sedzia).id_osoba),
                 Prawnik = _context.Osoba.FirstOrDefault(m => m.id_osoba == _context.Prawnik.FirstOrDefault(m => m.id_prawnik == rozprawa.id_prawnik).id_osoba),
                 Klient = _context.Osoba.FirstOrDefault(m => m.id_osoba == _context.Klient.FirstOrDefault(m => m.id_klient == rozprawa.id_klient).id_osoba),
