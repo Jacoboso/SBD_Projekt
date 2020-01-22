@@ -22,7 +22,21 @@ namespace SBD_Projekt.Controllers
         // GET: Obslugas
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Obsluga.ToListAsync());
+            var obslugaList = new List<OblugaDetailsViewModel>();
+            foreach(var obsluga in _context.Obsluga)
+            {
+                var osoba = await _context.Osoba.FirstOrDefaultAsync(n => n.id_osoba == obsluga.id_osoba);
+                obslugaList.Add(new OblugaDetailsViewModel
+                {
+                    id_obsluga = obsluga.id_obsluga,
+                    Osoba = osoba,
+                    Adres = await _context.Adres.FirstOrDefaultAsync(n => n.id_adres == osoba.id_adres),
+                    Godziny = await _context.Godziny.FirstOrDefaultAsync(n => n.id_godziny == obsluga.id_godziny),
+                    Zarobki = await _context.Zarobki.FirstOrDefaultAsync(n => n.id_zarobki == obsluga.id_zarobki),
+                    typ = obsluga.typ
+                });
+            }
+            return View(obslugaList);
         }
 
         // GET: Obslugas/Details/5

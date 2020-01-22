@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SBD_Projekt.Models.Obsluga>
+﻿@model IEnumerable<SBD_Projekt.Models.ViewModel.OblugaDetailsViewModel>
 
 @{
     ViewData["Title"] = "Lista Obsługi";
@@ -13,16 +13,13 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.id_osoba)
+                Pracownik 
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.id_zarobki)
+                Adres
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.id_godziny)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.typ)
+                Typ
             </th>
             <th></th>
         </tr>
@@ -31,13 +28,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.id_osoba)
+                @Html.DisplayFor(modelItem => item.Osoba.Imie)   @Html.DisplayFor(modelItem => item.Osoba.Nazwisko)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.id_zarobki)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.id_godziny)
+                @Html.DisplayFor(modelItem => item.Adres.Miasto) @Html.DisplayFor(modelItem => item.Adres.Ulica) @Html.DisplayFor(modelItem => item.Adres.Nr_domu) @Html.DisplayFor(modelItem => item.Adres.Nr_miszkania)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.typ)
