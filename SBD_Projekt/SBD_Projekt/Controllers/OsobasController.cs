@@ -21,7 +21,20 @@ namespace SBD_Projekt.Controllers
         // GET: Osobas
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Osoba.ToListAsync());
+            var ListaOsób = new List<OsobaDetailsViewModel>();
+            foreach (var osoba in _context.Osoba)
+            {
+                var os = await _context.Osoba.FirstOrDefaultAsync(m => m.id_osoba == osoba.id_osoba);
+                ListaOsób.Add(new OsobaDetailsViewModel
+                {
+                    Osoba = osoba,
+                    Adres = await _context.Adres.FirstOrDefaultAsync(m => m.id_adres == osoba.id_adres)
+
+                });
+               
+            }
+
+            return View(ListaOsób);
         }
 
         // GET: Osobas/Details/5
