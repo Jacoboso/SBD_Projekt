@@ -105,7 +105,7 @@ namespace SBD_Projekt.Controllers
                 {
                     if (osoba2.id_osoba == klient.id_osoba)
                         klientList.Add(new Tuple<int, string>(
-                        klient.id_prawnik,
+                        klient.id_osoba,
                         osoba2.Imie + " " + osoba2.Nazwisko)
                     );
                 }
@@ -191,7 +191,7 @@ namespace SBD_Projekt.Controllers
                 {
                     if (osoba2.id_osoba == klient.id_osoba)
                         klientList.Add(new Tuple<int, string>(
-                        klient.id_prawnik,
+                        klient.id_osoba,
                         osoba2.Imie + " " + osoba2.Nazwisko)
                     );
                 }
@@ -244,13 +244,22 @@ namespace SBD_Projekt.Controllers
             }
 
             var spotkanie = await _context.Spotkanie
-                .FirstOrDefaultAsync(m => m.id_spotkanie == id);
+                 .FirstOrDefaultAsync(m => m.id_spotkanie == id);
+
+            var SpotkanieShow = new SpotkanieDetailsViewModel
+            {
+                id_spotkanie = spotkanie.id_spotkanie,
+                Sala = _context.Sala.FirstOrDefault(m => m.id_sala == spotkanie.id_sali),
+                Godziny = _context.Godziny.FirstOrDefault(m => m.id_godziny == spotkanie.id_godziny),
+                Prawnik = _context.Osoba.FirstOrDefault(m => m.id_osoba == _context.Prawnik.FirstOrDefault(m => m.id_prawnik == spotkanie.id_prawnik).id_osoba),
+                Klient = _context.Osoba.FirstOrDefault(m => m.id_osoba == _context.Osoba.FirstOrDefault(m => m.id_osoba == spotkanie.id_klient).id_osoba)
+            };
             if (spotkanie == null)
             {
                 return NotFound();
             }
 
-            return View(spotkanie);
+            return View(SpotkanieShow);
         }
 
         // POST: Spotkanies/Delete/5
