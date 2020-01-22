@@ -14,5 +14,7 @@ namespace SBD_Projekt.Models
         public string Nazwa { get; set; }
         [Required]
         public string Typ { get; set; }
+
+        public int id_rozprawy { get; set; }
     }
 }

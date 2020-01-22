@@ -13,7 +13,6 @@ namespace SBD_Projekt.Models
         public int id_godziny { get; set; }
 
         public int id_wydzial { get; set; }
-        public int id_dowod { get; set; }
         public int id_sedzia { get; set; }
         public int id_prawnik { get; set; }
         public int id_klient { get; set; }

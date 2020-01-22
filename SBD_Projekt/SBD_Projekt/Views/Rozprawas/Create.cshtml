@@ -38,19 +38,7 @@
                 <span asp-validation-for="id_wydzial" class="text-danger"></span>
                 <input class="btn btn-primary" type="button" value="Stwórz nowy wydział" onclick="window.location.href = '@Url.Action("Create", "Wydzials")'" />
             </div>
-            <div class="form-group">
-                <label asp-for="id_dowod" class="control-label"></label>
-                @if (ViewBag.DowodsCount > 0)
-                {
-                    <select asp-for="id_dowod" class="form-control" asp-items="ViewBag.Dowod"></select>
-                }
-                else
-                {
-                    <p class="form-text text-danger">Brak dowodów w bazie danych</p>
-                }
-                <span asp-validation-for="id_dowod" class="text-danger"></span>
-                <input class="btn btn-primary" type="button" value="Stwórz nowy dowód" onclick="window.location.href = '@Url.Action("Create", "Dowods")'" />
-            </div>
+
             <div class="form-group">
                 <label asp-for="id_sedzia" class="control-label"></label>
                 @if (ViewBag.SedziasCount > 0)
