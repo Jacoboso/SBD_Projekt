@@ -45,6 +45,17 @@ namespace SBD_Projekt.Controllers
         // GET: Dowods/Create
         public IActionResult Create()
         {
+            ViewData["RozprawaCount"] = _context.Rozprawa.Count();
+            var rozprawaList = new List<Tuple<int, string>>();
+            foreach (var rozprawa in _context.Rozprawa)
+            {
+                rozprawaList.Add(new Tuple<int, string>(
+                rozprawa.id_rozprawa,
+                "numer: " + rozprawa.id_rozprawa));
+                  
+            }
+            ViewData["Rozprawa"] = new SelectList(rozprawaList, "Item1", "Item2");
+
             return View();
         }
 
