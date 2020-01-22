@@ -11,9 +11,15 @@ namespace SBD_Projekt.Models
 
         [Key]
         public int id_godziny { get; set; }
+
         [Required]
+        [DataType(DataType.Time)]
+        [DisplayFormat(DataFormatString = "{0:HH-mm}", ApplyFormatInEditMode = true)]
         public DateTime OdGodziny { get; set; }
+
         [Required]
+        [DataType(DataType.Time)]
+        [DisplayFormat(DataFormatString = "{0:HH-mm}", ApplyFormatInEditMode = true)]
         public DateTime DoGodziny { get; set; }
     }
 }

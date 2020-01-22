@@ -33,8 +33,6 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
-    var odGodziny = item.Godziny.DoGodziny.ToShortTimeString();
-    var doGodziny = item.Godziny.DoGodziny.ToShortTimeString();
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Sala.Rodzaj)
@@ -43,7 +41,7 @@
                 @Html.DisplayFor(modelItem => item.Sala.Wielkosc)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => odGodziny) - @Html.DisplayFor(modelItem => doGodziny)
+                @Html.DisplayFor(modelItem => item.Godziny.OdGodziny) - @Html.DisplayFor(modelItem => item.Godziny.DoGodziny)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Prawnik.Imie) @Html.DisplayFor(modelItem => item.Prawnik.Nazwisko)
