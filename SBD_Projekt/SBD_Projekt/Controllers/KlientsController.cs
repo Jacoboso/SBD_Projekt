@@ -21,7 +21,22 @@ namespace SBD_Projekt.Controllers
         // GET: Klients
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Klient.ToListAsync());
+
+            var Klientlist = new List<KlientDetailsViewModel>();
+            foreach(var klient in _context.Klient)
+            {
+                Klientlist.Add(new KlientDetailsViewModel
+                {
+                    id_klient= klient.id_klient,
+                    Klient = _context.Osoba.FirstOrDefault(m => m.id_osoba == klient.id_osoba),
+                    Prawnik = _context.Osoba.FirstOrDefault(m => m.id_osoba == klient.id_prawnik),
+                    Klient_Adres = _context.Adres.FirstOrDefault(m => m.id_adres == _context.Osoba.FirstOrDefault(m => m.id_osoba == klient.id_osoba).id_adres),
+                    Prawnik_Specjalizacja = _context.Specjalizacja.FirstOrDefault(m => m.id_specjalizacja == _context.Prawnik.FirstOrDefault(m => m.id_prawnik == klient.id_prawnik).id_specjalizacja),
+
+                });
+            }
+
+            return View(Klientlist);
         }
 
         // GET: Klients/Details/5
@@ -37,6 +52,7 @@ namespace SBD_Projekt.Controllers
 
             var klientDet = new KlientDetailsViewModel
             {
+                id_klient = klient.id_klient,
                 Klient = _context.Osoba.FirstOrDefault(m => m.id_osoba == klient.id_osoba),
                 Prawnik = _context.Osoba.FirstOrDefault(m => m.id_osoba == klient.id_prawnik),
                 Klient_Adres= _context.Adres.FirstOrDefault(m => m.id_adres == _context.Osoba.FirstOrDefault(m => m.id_osoba == klient.id_osoba).id_adres),
