@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SBD_Projekt.Models;
+using SBD_Projekt.Models.ViewModel;
 
 namespace SBD_Projekt.Controllers
 {
@@ -34,19 +35,41 @@ namespace SBD_Projekt.Controllers
 
             var sedzia = await _context.Sedzia
                 .FirstOrDefaultAsync(m => m.id_sedzia == id);
+
+
+
+            var sedziaShow = new SedziaDetailsViewModel
+            {
+                id_sedzia = sedzia.id_wydzial,
+                Osoba = _context.Osoba.FirstOrDefault(m => m.id_osoba == sedzia.id_osoba),
+                Wydzial= _context.Wydzial.FirstOrDefault(m => m.id_wydzial== sedzia.id_wydzial),
+                Zarobki = _context.Zarobki.FirstOrDefault(m => m.id_zarobki == sedzia.id_zarobki)
+            };
+
+
             if (sedzia == null)
             {
                 return NotFound();
             }
 
-            return View(sedzia);
+            return View(sedziaShow);
         }
 
         // GET: Sedzias/Create
         public IActionResult Create()
         {
             ViewData["OsobasCount"] = _context.Osoba.Count();
-            ViewData["Osoba"] = new SelectList(_context.Osoba, "id_osoba", "Imie");
+
+
+            var lista = new List<Tuple<int, string>>();
+            foreach (var osoba in _context.Osoba)
+            {
+                lista.Add(new Tuple<int, string>(
+                    osoba.id_osoba,
+                    osoba.Imie + " " + osoba.Nazwisko)
+                );
+            }
+            ViewData["Osoba"] = new SelectList(lista, "Item1", "Item2");
             ViewData["WydzialsCount"] = _context.Wydzial.Count();
             ViewData["Wydzial"] = new SelectList(_context.Wydzial, "id_wydzial", "nazwa");
             ViewData["ZarobkisCount"] = _context.Zarobki.Count();
@@ -136,13 +159,23 @@ namespace SBD_Projekt.Controllers
             }
 
             var sedzia = await _context.Sedzia
-                .FirstOrDefaultAsync(m => m.id_sedzia == id);
+                 .FirstOrDefaultAsync(m => m.id_sedzia == id);
+
+
+
+            var sedziaShow = new SedziaDetailsViewModel
+            {
+                id_sedzia = sedzia.id_wydzial,
+                Osoba = _context.Osoba.FirstOrDefault(m => m.id_osoba == sedzia.id_osoba),
+                Wydzial = _context.Wydzial.FirstOrDefault(m => m.id_wydzial == sedzia.id_wydzial),
+                Zarobki = _context.Zarobki.FirstOrDefault(m => m.id_zarobki == sedzia.id_zarobki)
+            };
             if (sedzia == null)
             {
                 return NotFound();
             }
 
-            return View(sedzia);
+            return View(sedziaShow);
         }
 
         // POST: Sedzias/Delete/5

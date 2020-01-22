@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SBD_Projekt.Models;
+using SBD_Projekt.Models.ViewModel;
 
 namespace SBD_Projekt.Controllers
 {
@@ -34,19 +35,41 @@ namespace SBD_Projekt.Controllers
 
             var wydzial = await _context.Wydzial
                 .FirstOrDefaultAsync(m => m.id_wydzial == id);
+
+
+            var wydzialShow = new WydzialDetailsViewModel
+            {
+                id_wydzial = wydzial.id_wydzial,
+                nazwa = wydzial.nazwa,
+                Budynek = _context.Budynek.FirstOrDefault(m => m.id_budynek == wydzial.id_budynku)          
+            };
+
+
+
             if (wydzial == null)
             {
                 return NotFound();
             }
 
-            return View(wydzial);
+            return View(wydzialShow);
         }
 
         // GET: Wydzials/Create
         public IActionResult Create()
         {
             ViewData["BudyneksCount"] = _context.Budynek.Count();
-            ViewData["Budynek"] = new SelectList(_context.Budynek, "id_budynek", "Miasto");
+            var BudynekList = new List<Tuple<int, string>>();
+            foreach (var budynek in _context.Budynek)
+            {
+
+                BudynekList.Add(new Tuple<int, string>(
+                budynek.id_budynek,
+                budynek.Miasto + " " + budynek.Ulica + " " + budynek.NrBudynku));
+                 
+            }
+            ViewData["Budynek"] = new SelectList(BudynekList, "Item1", "Item2");
+
+          
             return View();
         }
 
@@ -81,7 +104,16 @@ namespace SBD_Projekt.Controllers
             }
 
             ViewData["BudyneksCount"] = _context.Budynek.Count();
-            ViewData["Budynek"] = new SelectList(_context.Budynek, "id_budynek", "Miasto");
+            var BudynekList = new List<Tuple<int, string>>();
+            foreach (var budynek in _context.Budynek)
+            {
+
+                BudynekList.Add(new Tuple<int, string>(
+                budynek.id_budynek,
+                budynek.Miasto + " " + budynek.Ulica + " " + budynek.NrBudynku));
+
+            }
+            ViewData["Budynek"] = new SelectList(BudynekList, "Item1", "Item2");
             return View(wydzial);
         }
 
@@ -130,12 +162,20 @@ namespace SBD_Projekt.Controllers
 
             var wydzial = await _context.Wydzial
                 .FirstOrDefaultAsync(m => m.id_wydzial == id);
+
+
+            var wydzialShow = new WydzialDetailsViewModel
+            {
+                id_wydzial = wydzial.id_wydzial,
+                nazwa = wydzial.nazwa,
+                Budynek = _context.Budynek.FirstOrDefault(m => m.id_budynek == wydzial.id_budynku)
+            };
             if (wydzial == null)
             {
                 return NotFound();
             }
 
-            return View(wydzial);
+            return View(wydzialShow);
         }
 
         // POST: Wydzials/Delete/5

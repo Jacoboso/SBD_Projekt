@@ -1,4 +1,4 @@
-﻿@model SBD_Projekt.Models.Sedzia
+﻿@model SBD_Projekt.Models.ViewModel.SedziaDetailsViewModel
 
 @{
     ViewData["Title"] = "Usuń";
@@ -11,23 +11,29 @@
     <h4>Sedzia</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.id_osoba)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Osoba.Imie)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.id_osoba)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Osoba.Imie)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.id_wydzial)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Osoba.Nazwisko)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.id_wydzial)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Osoba.Nazwisko)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.id_zarobki)
+        <dt class="col-sm-2">
+            Nazwa Wydziału:
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.id_zarobki)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Wydzial.nazwa)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Zarobki.zarobek)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Zarobki.zarobek)
         </dd>
     </dl>
     
