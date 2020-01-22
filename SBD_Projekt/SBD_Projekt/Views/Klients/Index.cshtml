@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SBD_Projekt.Models.Klient>
+﻿@model IEnumerable<SBD_Projekt.Models.ViewModel.KlientDetailsViewModel>
 
 @{
     ViewData["Title"] = "Lista Klientów";
@@ -13,10 +13,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.id_osoba)
+                Klient
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.id_prawnik)
+                Prawnik
             </th>
             <th></th>
         </tr>
@@ -25,10 +25,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.id_osoba)
+                @Html.DisplayFor(modelItem => item.Klient.Imie) @Html.DisplayFor(modelItem => item.Klient.Nazwisko)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.id_prawnik)
+                @Html.DisplayFor(modelItem => item.Prawnik.Imie) @Html.DisplayFor(modelItem => item.Prawnik.Nazwisko)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.id_klient">Edycja</a> |

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SBD_Projekt.Models.Rozprawa>
+﻿@model IEnumerable<SBD_Projekt.Models.ViewModel.RozprawaDetailsViewModel>
 
 @{
     ViewData["Title"] = "Lista Rozpraw";
@@ -13,19 +13,22 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.id_godziny)
+                Nr rozprawy
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.id_wydzial)
-            </th>         
-            <th>
-                @Html.DisplayNameFor(model => model.id_sedzia)
+                Wydział
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.id_prawnik)
+                Godziny
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.id_klient)
+                Sędzia
+            </th>
+            <th>
+                Prawnik
+            </th>
+            <th>
+                Klient
             </th>
             <th></th>
         </tr>
@@ -34,20 +37,23 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.id_godziny)
+                @Html.DisplayFor(modelItem => item.id_rozprawa)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.id_wydzial)
+                @Html.DisplayFor(modelItem => item.Wydzial.nazwa)
             </td>
-           
+
             <td>
-                @Html.DisplayFor(modelItem => item.id_sedzia)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.id_prawnik)
+                @Html.DisplayFor(modelItem => item.Godziny.OdGodziny)<br />@Html.DisplayFor(modelItem => item.Godziny.DoGodziny)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.id_klient)
+                @Html.DisplayFor(modelItem => item.Sedzia.Imie)  @Html.DisplayFor(modelItem => item.Sedzia.Nazwisko)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Prawnik.Imie)  @Html.DisplayFor(modelItem => item.Prawnik.Nazwisko)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Klient.Imie)  @Html.DisplayFor(modelItem => item.Klient.Nazwisko)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.id_rozprawa">Edytuj</a> |
