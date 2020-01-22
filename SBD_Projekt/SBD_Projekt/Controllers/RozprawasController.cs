@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SBD_Projekt.Models;
-
+using SBD_Projekt.Models.ViewModel;
 namespace SBD_Projekt.Controllers
 {
     public class RozprawasController : Controller
@@ -21,6 +21,10 @@ namespace SBD_Projekt.Controllers
         // GET: Rozprawas
         public async Task<IActionResult> Index()
         {
+
+            
+           
+
             return View(await _context.Rozprawa.ToListAsync());
         }
 
@@ -34,29 +38,91 @@ namespace SBD_Projekt.Controllers
 
             var rozprawa = await _context.Rozprawa
                 .FirstOrDefaultAsync(m => m.id_rozprawa == id);
+            var rosprawaShow = new RozprawaDetailsViewModel
+            {
+                id_rozprawa = rozprawa.id_rozprawa,
+                Wydzial= _context.Wydzial.FirstOrDefault(m => m.id_wydzial == rozprawa.id_wydzial),
+                Sedzia = _context.Osoba.FirstOrDefault(m => m.id_osoba == _context.Sedzia.FirstOrDefault(m => m.id_sedzia == rozprawa.id_sedzia).id_osoba),
+                Prawnik = _context.Osoba.FirstOrDefault(m => m.id_osoba == _context.Prawnik.FirstOrDefault(m => m.id_prawnik == rozprawa.id_prawnik).id_osoba),
+                Klient = _context.Osoba.FirstOrDefault(m => m.id_osoba == _context.Klient.FirstOrDefault(m => m.id_klient == rozprawa.id_klient).id_osoba),
+                Dowody= _context.Dowod.Select(n=>n).Where(n=>n.id_rozprawy== rozprawa.id_rozprawa).ToList()
+            };
+
+
             if (rozprawa == null)
             {
                 return NotFound();
             }
 
-            return View(rozprawa);
+            return View(rosprawaShow);
         }
 
         // GET: Rozprawas/Create
         public IActionResult Create()
         {
             ViewData["GodziniesCount"] = _context.Godziny.Count();
-            ViewData["Godziny"] = new SelectList(_context.Godziny, "id_godziny", "id_godziny");
+            var GodzinyList = new List<Tuple<int, string>>();
+            foreach (var godzina in _context.Godziny)
+            {
+
+                GodzinyList.Add(new Tuple<int, string>(
+                godzina.id_godziny,
+                godzina.OdGodziny + " DO " + godzina.DoGodziny)
+            );
+
+            }
+            ViewData["Godziny"] = new SelectList(GodzinyList, "Item1", "Item2");
+
             ViewData["WydzialsCount"] = _context.Wydzial.Count();
-            ViewData["Wydzial"] = new SelectList(_context.Wydzial, "id_wydzial", "id_wydzial");
-            ViewData["DowodsCount"] = _context.Dowod.Count();
-            ViewData["Dowod"] = new SelectList(_context.Dowod, "id_dowod", "Nazwa");
+            ViewData["Wydzial"] = new SelectList(_context.Wydzial, "id_wydzial", "nazwa");
+
+
             ViewData["SedziasCount"] = _context.Sedzia.Count();
-            ViewData["Sedzia"] = new SelectList(_context.Sedzia, "id_sedzia", "id_sedzia");
+            var sedziaList = new List<Tuple<int, string>>();
+            foreach (var osoba2 in _context.Osoba)
+            {
+                foreach (var sedzia in _context.Sedzia)
+                {
+                    if (osoba2.id_osoba == sedzia.id_osoba)
+                        sedziaList.Add(new Tuple<int, string>(
+                        sedzia.id_sedzia,
+                        osoba2.Imie + " " + osoba2.Nazwisko)
+                    );
+                }
+            }
+
+
+            ViewData["Sedzia"] = new SelectList(sedziaList, "Item1", "Item2");
+
             ViewData["PrawniksCount"] = _context.Prawnik.Count();
-            ViewData["Prawnik"] = new SelectList(_context.Prawnik, "id_prawnik", "id_prawnik");
+            var prawnicyLista = new List<Tuple<int, string>>();
+            foreach (var osoba2 in _context.Osoba)
+            {
+                foreach (var prawnik in _context.Prawnik)
+                {
+                    if (osoba2.id_osoba == prawnik.id_osoba)
+                        prawnicyLista.Add(new Tuple<int, string>(
+                        prawnik.id_prawnik,
+                        osoba2.Imie + " " + osoba2.Nazwisko)
+                    );
+                }
+            }
+            ViewData["Prawnik"] = new SelectList(prawnicyLista, "Item1", "Item2");
+
             ViewData["KlientsCount"] = _context.Klient.Count();
-            ViewData["Klient"] = new SelectList(_context.Klient, "id_klient", "id_klient");
+            var klientList = new List<Tuple<int, string>>();
+            foreach (var osoba2 in _context.Osoba)
+            {
+                foreach (var klient in _context.Klient)
+                {
+                    if (osoba2.id_osoba == klient.id_osoba)
+                        klientList.Add(new Tuple<int, string>(
+                        klient.id_klient,
+                        osoba2.Imie + " " + osoba2.Nazwisko)
+                    );
+                }
+            }
+            ViewData["Klient"] = new SelectList(klientList, "Item1", "Item2");
             return View();
         }
 
@@ -90,17 +156,68 @@ namespace SBD_Projekt.Controllers
                 return NotFound();
             }
             ViewData["GodziniesCount"] = _context.Godziny.Count();
-            ViewData["Godziny"] = new SelectList(_context.Godziny, "id_godziny", "id_godziny");
+            var GodzinyList = new List<Tuple<int, string>>();
+            foreach (var godzina in _context.Godziny)
+            {
+
+                GodzinyList.Add(new Tuple<int, string>(
+                godzina.id_godziny,
+                godzina.OdGodziny + " DO " + godzina.DoGodziny)
+            );
+
+            }
+            ViewData["Godziny"] = new SelectList(GodzinyList, "Item1", "Item2");
+
             ViewData["WydzialsCount"] = _context.Wydzial.Count();
-            ViewData["Wydzial"] = new SelectList(_context.Wydzial, "id_wydzial", "id_wydzial");
-            ViewData["DowodsCount"] = _context.Dowod.Count();
-            ViewData["Dowod"] = new SelectList(_context.Dowod, "id_dowod", "Nazwa");
+            ViewData["Wydzial"] = new SelectList(_context.Wydzial, "id_wydzial", "nazwa");
+
+
             ViewData["SedziasCount"] = _context.Sedzia.Count();
-            ViewData["Sedzia"] = new SelectList(_context.Sedzia, "id_sedzia", "id_sedzia");
+            var sedziaList = new List<Tuple<int, string>>();
+            foreach (var osoba2 in _context.Osoba)
+            {
+                foreach (var sedzia in _context.Sedzia)
+                {
+                    if (osoba2.id_osoba == sedzia.id_osoba)
+                        sedziaList.Add(new Tuple<int, string>(
+                        sedzia.id_sedzia,
+                        osoba2.Imie + " " + osoba2.Nazwisko)
+                    );
+                }
+            }
+
+
+            ViewData["Sedzia"] = new SelectList(sedziaList, "Item1", "Item2");
+
             ViewData["PrawniksCount"] = _context.Prawnik.Count();
-            ViewData["Prawnik"] = new SelectList(_context.Prawnik, "id_prawnik", "id_prawnik");
+            var prawnicyLista = new List<Tuple<int, string>>();
+            foreach (var osoba2 in _context.Osoba)
+            {
+                foreach (var prawnik in _context.Prawnik)
+                {
+                    if (osoba2.id_osoba == prawnik.id_osoba)
+                        prawnicyLista.Add(new Tuple<int, string>(
+                        prawnik.id_prawnik,
+                        osoba2.Imie + " " + osoba2.Nazwisko)
+                    );
+                }
+            }
+            ViewData["Prawnik"] = new SelectList(prawnicyLista, "Item1", "Item2");
+
             ViewData["KlientsCount"] = _context.Klient.Count();
-            ViewData["Klient"] = new SelectList(_context.Klient, "id_klient", "id_klient");
+            var klientList = new List<Tuple<int, string>>();
+            foreach (var osoba2 in _context.Osoba)
+            {
+                foreach (var klient in _context.Klient)
+                {
+                    if (osoba2.id_osoba == klient.id_osoba)
+                        klientList.Add(new Tuple<int, string>(
+                        klient.id_osoba,
+                        osoba2.Imie + " " + osoba2.Nazwisko)
+                    );
+                }
+            }
+            ViewData["Klient"] = new SelectList(klientList, "Item1", "Item2");
             return View(rozprawa);
         }
 
@@ -147,14 +264,25 @@ namespace SBD_Projekt.Controllers
                 return NotFound();
             }
 
+           
+
             var rozprawa = await _context.Rozprawa
-                .FirstOrDefaultAsync(m => m.id_rozprawa == id);
+     .FirstOrDefaultAsync(m => m.id_rozprawa == id);
+            var rosprawaShow = new RozprawaDetailsViewModel
+            {
+                id_rozprawa = rozprawa.id_rozprawa,
+                Wydzial = _context.Wydzial.FirstOrDefault(m => m.id_wydzial == rozprawa.id_wydzial),
+                Sedzia = _context.Osoba.FirstOrDefault(m => m.id_osoba == _context.Sedzia.FirstOrDefault(m => m.id_sedzia == rozprawa.id_sedzia).id_osoba),
+                Prawnik = _context.Osoba.FirstOrDefault(m => m.id_osoba == _context.Prawnik.FirstOrDefault(m => m.id_prawnik == rozprawa.id_prawnik).id_osoba),
+                Klient = _context.Osoba.FirstOrDefault(m => m.id_osoba == _context.Klient.FirstOrDefault(m => m.id_klient == rozprawa.id_klient).id_osoba),
+                Dowody = _context.Dowod.Select(n => n).Where(n => n.id_rozprawy == rozprawa.id_rozprawa).ToList()
+            };
             if (rozprawa == null)
             {
                 return NotFound();
             }
 
-            return View(rozprawa);
+            return View(rosprawaShow);
         }
 
         // POST: Rozprawas/Delete/5

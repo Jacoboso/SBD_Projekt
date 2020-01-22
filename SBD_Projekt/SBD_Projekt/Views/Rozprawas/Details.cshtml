@@ -1,4 +1,4 @@
-﻿@model SBD_Projekt.Models.Rozprawa
+﻿@model SBD_Projekt.Models.ViewModel.RozprawaDetailsViewModel
 
 @{
     ViewData["Title"] = "Szczegóły";
@@ -11,34 +11,42 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.id_godziny)
+           Godziny:
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.id_godziny)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Godziny.OdGodziny) do @Html.DisplayFor(model => model.Godziny.DoGodziny)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.id_wydzial)
+            Sędzia:
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.id_wydzial)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Sedzia.Imie) @Html.DisplayFor(model => model.Sedzia.Nazwisko)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.id_sedzia)
+           Prawnik:
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.id_sedzia)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Prawnik.Imie)  @Html.DisplayFor(model => model.Prawnik.Nazwisko)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.id_prawnik)
+            Klient:
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.id_prawnik)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Klient.Imie)  @Html.DisplayFor(model => model.Klient.Nazwisko)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.id_klient)
+            Dowody: 
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.id_klient)
+        <dd class="col-sm-10">
+            @if (Model.Dowody != null)
+            {
+                foreach (var dowod in Model.Dowody)
+                {
+                  <p> @dowod.Nazwa typ: @dowod.Typ ,</p>
+
+  
+                }
+            }
         </dd>
     </dl>
 </div>
