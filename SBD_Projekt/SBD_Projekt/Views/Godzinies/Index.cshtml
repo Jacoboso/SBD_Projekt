@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<SBD_Projekt.Models.Godziny>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Lista Godzin";
 }
 
-<h1>Index</h1>
+<h1>Lista Godzin</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Dodaj nowe godziny</a>
 </p>
 <table class="table">
     <thead>
@@ -31,9 +31,9 @@
                 @Html.DisplayFor(modelItem => item.DoGodziny)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.id_godziny">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.id_godziny">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.id_godziny">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.id_godziny">Edytuj</a> |
+                <a asp-action="Details" asp-route-id="@item.id_godziny">Szczegóły</a> |
+                <a asp-action="Delete" asp-route-id="@item.id_godziny">Usuń</a>
             </td>
         </tr>
 }

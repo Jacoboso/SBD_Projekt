@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<SBD_Projekt.Models.Budynek>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Lista Budynków";
 }
 
-<h1>Index</h1>
+<h1>Lista Budynków</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Dodaj nowy budynek</a>
 </p>
 <table class="table">
     <thead>
@@ -43,9 +43,9 @@
                 @Html.DisplayFor(modelItem => item.NrBudynku)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.id_budynek">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.id_budynek">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.id_budynek">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.id_budynek">Edycja</a> |
+                <a asp-action="Details" asp-route-id="@item.id_budynek">Szczegóły</a> |
+                <a asp-action="Delete" asp-route-id="@item.id_budynek">Usuń</a>
             </td>
         </tr>
 }

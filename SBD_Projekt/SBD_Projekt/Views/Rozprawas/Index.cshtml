@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<SBD_Projekt.Models.Rozprawa>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Lista Rozpraw";
 }
 
-<h1>Index</h1>
+<h1>Lista Rozpraw</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Dodaj nową rozprawe</a>
 </p>
 <table class="table">
     <thead>
@@ -55,9 +55,9 @@
                 @Html.DisplayFor(modelItem => item.id_klient)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.id_rozprawa">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.id_rozprawa">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.id_rozprawa">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.id_rozprawa">Edytuj</a> |
+                <a asp-action="Details" asp-route-id="@item.id_rozprawa">Szczegóły</a> |
+                <a asp-action="Delete" asp-route-id="@item.id_rozprawa">Usuń</a>
             </td>
         </tr>
 }

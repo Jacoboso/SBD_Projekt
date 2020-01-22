@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<SBD_Projekt.Models.Specjalizacja>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Lista Specjalizacji";
 }
 
-<h1>Index</h1>
+<h1>Lista Specjalizacji</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Dodaj nową specjalizację</a>
 </p>
 <table class="table">
     <thead>
@@ -31,9 +31,9 @@
                 @Html.DisplayFor(modelItem => item.doswiadczenie)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.id_specjalizacja">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.id_specjalizacja">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.id_specjalizacja">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.id_specjalizacja">Edytuj</a> |
+                <a asp-action="Details" asp-route-id="@item.id_specjalizacja">Szczegóły</a> |
+                <a asp-action="Delete" asp-route-id="@item.id_specjalizacja">Usuń</a>
             </td>
         </tr>
 }
