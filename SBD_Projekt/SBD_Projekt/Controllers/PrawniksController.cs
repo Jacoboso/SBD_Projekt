@@ -35,7 +35,6 @@ namespace SBD_Projekt.Controllers
                     Zarobki = await _context.Zarobki.FirstOrDefaultAsync(n => n.id_zarobki == prawnik.id_zarobki),
                     Specjalizacje = await _context.Specjalizacja.FirstOrDefaultAsync(n => n.id_specjalizacja == prawnik.id_specjalizacja)
                 }) ;
-
             }
 
             return View(ListaPrawników);
