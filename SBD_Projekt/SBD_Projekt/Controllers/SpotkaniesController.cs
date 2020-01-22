@@ -23,7 +23,21 @@ namespace SBD_Projekt.Controllers
         // GET: Spotkanies
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Spotkanie.ToListAsync());
+            var ListaSpotkań = new List<SpotkanieDetailsViewModel>();
+            foreach (var spotkanie in _context.Spotkanie)
+            {
+                var spot = await _context.Spotkanie.FirstOrDefaultAsync(m => m.id_spotkanie == spotkanie.id_spotkanie);
+                ListaSpotkań.Add(new SpotkanieDetailsViewModel
+                {
+                    id_spotkanie = spotkanie.id_spotkanie,
+                    Sala = _context.Sala.FirstOrDefault(m => m.id_sala == spotkanie.id_sali),
+                    Godziny = _context.Godziny.FirstOrDefault(m => m.id_godziny == spotkanie.id_godziny),
+                    Prawnik = _context.Osoba.FirstOrDefault(m => m.id_osoba == _context.Prawnik.FirstOrDefault(m => m.id_prawnik == spotkanie.id_prawnik).id_osoba),
+                    Klient = _context.Osoba.FirstOrDefault(m => m.id_osoba == _context.Osoba.FirstOrDefault(m => m.id_osoba == spotkanie.id_klient).id_osoba)
+                });
+            }
+
+            return View(ListaSpotkań);
         }
 
         // GET: Spotkanies/Details/5

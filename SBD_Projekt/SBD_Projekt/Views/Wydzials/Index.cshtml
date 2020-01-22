@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SBD_Projekt.Models.Wydzial>
+﻿@model IEnumerable<SBD_Projekt.Models.ViewModel.WydzialDetailsViewModel>
 
 @{
     ViewData["Title"] = "Lista Wydziałów";
@@ -13,10 +13,19 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.id_budynku)
+                Miasto
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.nazwa)
+                Ulica
+            </th>
+            <th>
+                Nr mieszkania
+            </th>
+            <th>
+                Kod pocztowy
+            </th>
+            <th>
+                Nazwa
             </th>
             <th></th>
         </tr>
@@ -25,7 +34,16 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.id_budynku)
+                @Html.DisplayFor(modelItem => item.Budynek.Miasto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Budynek.Ulica)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Budynek.NrBudynku)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Budynek.KodPocztowy)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.nazwa)

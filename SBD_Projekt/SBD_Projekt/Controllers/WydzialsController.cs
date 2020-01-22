@@ -22,7 +22,20 @@ namespace SBD_Projekt.Controllers
         // GET: Wydzials
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Wydzial.ToListAsync());
+            var ListaWydziałów = new List<WydzialDetailsViewModel>();
+            foreach (var wydzial in _context.Wydzial)
+            {
+                var wydz = await _context.Wydzial.FirstOrDefaultAsync(n => n.id_wydzial == wydzial.id_wydzial);
+                ListaWydziałów.Add(new WydzialDetailsViewModel
+                {
+                    id_wydzial = wydzial.id_wydzial,
+                    nazwa = wydzial.nazwa,
+                    Budynek = _context.Budynek.FirstOrDefault(m => m.id_budynek == wydzial.id_budynku)
+                });
+
+            }
+
+            return View(ListaWydziałów);
         }
 
         // GET: Wydzials/Details/5

@@ -22,7 +22,21 @@ namespace SBD_Projekt.Controllers
         // GET: Sedzias
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Sedzia.ToListAsync());
+            var ListaSędziów = new List<SedziaDetailsViewModel>();
+            foreach (var sedzia in _context.Sedzia)
+            {
+                var sedz = await _context.Sedzia.FirstOrDefaultAsync(m => m.id_sedzia == sedzia.id_sedzia);
+                ListaSędziów.Add(new SedziaDetailsViewModel
+                {
+                    id_sedzia = sedzia.id_wydzial,
+                    Osoba = _context.Osoba.FirstOrDefault(m => m.id_osoba == sedzia.id_osoba),
+                    Wydzial = _context.Wydzial.FirstOrDefault(m => m.id_wydzial == sedzia.id_wydzial),
+                    Zarobki = _context.Zarobki.FirstOrDefault(m => m.id_zarobki == sedzia.id_zarobki)
+                });
+
+            }
+
+            return View(ListaSędziów);
         }
 
         // GET: Sedzias/Details/5

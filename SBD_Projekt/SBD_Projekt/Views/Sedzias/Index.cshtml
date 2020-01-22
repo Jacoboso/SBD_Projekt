@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SBD_Projekt.Models.Sedzia>
+﻿@model IEnumerable<SBD_Projekt.Models.ViewModel.SedziaDetailsViewModel>
 
 @{
     ViewData["Title"] = "Lista Sędziów";
@@ -13,13 +13,16 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.id_osoba)
+                Imię i Nazwisko
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.id_wydzial)
+                Nazwa Wydziału
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.id_zarobki)
+                Zarobki
+            </th>
+            <th>
+                Premia
             </th>
             <th></th>
         </tr>
@@ -28,13 +31,16 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.id_osoba)
+                @Html.DisplayFor(modelItem => item.Osoba.Imie) @Html.DisplayFor(modelItem => item.Osoba.Nazwisko)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.id_wydzial)
+                @Html.DisplayFor(modelItem => item.Wydzial.nazwa)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.id_zarobki)
+                @Html.DisplayFor(modelItem => item.Zarobki.zarobek)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Zarobki.premia)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.id_sedzia">Edytuj</a> |

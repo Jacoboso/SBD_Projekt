@@ -1,7 +1,8 @@
-﻿@model IEnumerable<SBD_Projekt.Models.Spotkanie>
+﻿@model IEnumerable<SBD_Projekt.Models.ViewModel.SpotkanieDetailsViewModel>
 
 @{
     ViewData["Title"] = "Lista Spotkań";
+
 }
 
     <h1>Lista Spotkań</h1>
@@ -13,16 +14,19 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.id_sali)
+                Rodzaj
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.id_godziny)
+                Wielkość
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.id_prawnik)
+                Godziny Spotkania
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.id_klient)
+                Imię i Nazwisko Prawnika
+            </th>
+            <th>
+                Imię i Nazwisko Klienta
             </th>
             <th></th>
         </tr>
@@ -31,16 +35,19 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.id_sali)
+                @Html.DisplayFor(modelItem => item.Sala.Rodzaj)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.id_godziny)
+                @Html.DisplayFor(modelItem => item.Sala.Wielkosc)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.id_prawnik)
+                @Html.DisplayFor(modelItem => item.Godziny.OdGodziny) @Html.DisplayFor(modelItem => item.Godziny.DoGodziny)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.id_klient)
+                @Html.DisplayFor(modelItem => item.Prawnik.Imie) @Html.DisplayFor(modelItem => item.Prawnik.Nazwisko)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Klient.Imie) @Html.DisplayFor(modelItem => item.Klient.Nazwisko)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.id_spotkanie">Edytuj</a> |
